@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.PosterItem;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PosterManagerIfNotEmptyTest {
@@ -36,28 +37,44 @@ class PosterManagerIfNotEmptyTest {
         PosterItem item1 = new PosterItem(1, "Бладшот", "боевик", "http://test1", false);
         PosterItem item2 = new PosterItem(2, "Вперед", "мультфильм", "http://test2", false);
         PosterItem item3 = new PosterItem(3, "Отель \"Белград\"", "комедия", "http://test3", false);
-        assertEquals(items[0], item3);
-        assertEquals(items[1], item2);
-        assertEquals(items[2], item1);
+        PosterItem[] expectedItems = new PosterItem[3];
+        expectedItems[0] = item3;
+        expectedItems[1] = item2;
+        expectedItems[2] = item1;
+        assertArrayEquals(expectedItems, items);
     }
 
     @Test
     void getItemsIfCountEqualMaxResultCount() {
-        PosterItem item = new PosterItem(4, "Джентельмены", "боевик", "http://test4", false);
-        posterManager.add(item);
+        PosterItem item1 = new PosterItem(1, "Бладшот", "боевик", "http://test1", false);
+        PosterItem item2 = new PosterItem(2, "Вперед", "мультфильм", "http://test2", false);
+        PosterItem item3 = new PosterItem(3, "Отель \"Белград\"", "комедия", "http://test3", false);
+        PosterItem item4 = new PosterItem(4, "Джентельмены", "боевик", "http://test4", false);
+        PosterItem[] expectedItems = new PosterItem[4];
+        expectedItems[0] = item4;
+        expectedItems[1] = item3;
+        expectedItems[2] = item2;
+        expectedItems[3] = item1;
+        posterManager.add(new PosterItem(4, "Джентельмены", "боевик", "http://test4", false));
         PosterItem[] items = posterManager.getItems();
-        assertEquals(items[0], new PosterItem(4, "Джентельмены", "боевик", "http://test4", false));
+        assertArrayEquals(expectedItems, items);
     }
 
 
     @Test
     void getItemsIfCountAboveMaxResultCount() {
-        PosterItem item1 = new PosterItem(4, "Джентельмены", "боевик", "http://test4", false);
-        PosterItem item2 = new PosterItem(5, "Человек невидимка", "ужасы", "http://test5", false);
-        posterManager.add(item1);
-        posterManager.add(item2);
+        PosterItem item2 = new PosterItem(2, "Вперед", "мультфильм", "http://test2", false);
+        PosterItem item3 = new PosterItem(3, "Отель \"Белград\"", "комедия", "http://test3", false);
+        PosterItem item4 = new PosterItem(4, "Джентельмены", "боевик", "http://test4", false);
+        PosterItem item5 = new PosterItem(5, "Человек невидимка", "ужасы", "http://test5", false);
+        PosterItem[] expectedItems = new PosterItem[4];
+        expectedItems[0] = item5;
+        expectedItems[1] = item4;
+        expectedItems[2] = item3;
+        expectedItems[3] = item2;
+        posterManager.add(new PosterItem(4, "Джентельмены", "боевик", "http://test4", false));
+        posterManager.add(new PosterItem(5, "Человек невидимка", "ужасы", "http://test5", false));
         PosterItem[] items = posterManager.getItems();
-        assertEquals(items[0], new PosterItem(5, "Человек невидимка", "ужасы", "http://test5", false));
-        assertEquals(4, items.length);
+        assertArrayEquals(expectedItems, items);
     }
 }
