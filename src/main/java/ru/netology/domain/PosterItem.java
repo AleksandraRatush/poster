@@ -2,15 +2,17 @@ package ru.netology.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class PurchaseItem {
+@EqualsAndHashCode
+public class PosterItem {
   private int id;
-  private int productId;
-  private String productName;
-  private int productPrice;
-  private int count;
+  private String name;
+  private String genre;
+  private String picUrl;
+  private boolean isFirstNight;
 }
