@@ -28,7 +28,6 @@ class PosterManagerIfEmptyTest {
     void getItems() {
         PosterItem[] items = posterManager.getItems();
         PosterItem[] array = new PosterItem[0];
-        assertEquals(0, items.length);
         assertArrayEquals(array,items);
     }
 }
